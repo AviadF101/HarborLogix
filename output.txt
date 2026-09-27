@@ -1,0 +1,124 @@
+Build OK.
+
+  run.bat test    - acceptance test
+  run.bat app     - your demo program
+  run.bat check   - open/closed check on Yard.java
+  
+================================================  
+  run.bat test  
+================================================  
+  
+HarborLogix acceptance test
+Student ID declared: 331771576
+--------------------------------------------------
+  PASS  student ID is digits only, at least 2 digits
+  PASS  BASE_STORAGE_RATE derived from D1
+  PASS  POWER_RATE derived from D2
+  PASS  HAZMAT_MULTIPLIER derived from D1
+  PASS  LIQUID_RATE derived from D2
+  PASS  OVERSIZE_DAILY_FLAT derived from D1
+  PASS  YARD_CAPACITY derived from D1
+  PASS  CargoUnit is abstract
+  PASS  RefrigeratedContainer extends StandardContainer (3 levels)
+  PASS  HazmatContainer extends StandardContainer
+  PASS  LiquidTank extends CargoUnit directly
+  PASS  totalStorageCharge() is final
+  PASS  all instance fields are private
+  PASS  standard daily fee
+  PASS  totalStorageCharge = fee x days
+  PASS  reefer fee extends parent fee
+  PASS  reefer costs more than plain container of same volume
+  PASS  hazmat fee multiplies parent fee
+  PASS  tank fee uses actual content
+  PASS  transferOut reduces the daily fee
+  PASS  dispatch through base reference reaches Reefer
+  PASS  dispatch through base reference reaches Tank
+  PASS  toString chain includes subclass detail
+  PASS  hazmat briefing states the class
+  PASS  standard client discount is 0
+  PASS  contract client discount
+  PASS  government client discount
+  PASS  government client has priority
+  PASS  standard client has no priority
+  PASS  tiers are distinct
+  PASS  yard revenue sums polymorphic fees
+  PASS  invoice applies the client's own discount
+  PASS  walk-in invoice has no discount
+  PASS  heaviestUnit returns the heaviest
+  PASS  duplicate unit ID is rejected
+  PASS  over-capacity throws IllegalStateException
+  PASS  negative weight rejected
+  PASS  zero volume rejected
+  PASS  null owner rejected
+  PASS  reefer above 8C rejected
+  PASS  hazard class 0 rejected
+  PASS  fill percent over 100 rejected
+  PASS  contract discount over 40 rejected
+  PASS  blank client name rejected
+--------------------------------------------------
+passed: 44   failed: 0
+RESULT: PASS - conformant. Design marks are assessed separately.
+  
+================================================  
+  run.bat app  
+================================================  
+  
+HarborLogix terminal - student 331771576
+Yard capacity: 26
+
+== 1. YARD MANIFEST ==
+Manifest for Ashdod Terminal A (4/26 units)
+  Standard[id=U-001, owner=Walk In Ltd, 18000.0 kg, 10 days] volume=33.0 m3
+      Standard container - check seals and twist-locks before lifting.
+  Reefer[id=U-002, owner=Blue Star Shipping, 21000.0 kg, 7 days] volume=28.0 m3 temp=-18.0 C power=6.5 kW
+      Reefer - keep power connected, target -18.0 C, draw 6.5 kW.
+  Hazmat[id=U-003, owner=Port Authority, 15000.0 kg, 4 days] volume=24.0 m3 hazard=3 escort=true
+      Hazmat class 3 - escort required.
+  Tank[id=U-004, owner=Walk In Ltd, 26000.0 kg, 12 days] capacity=20000.0 L fill=80.0%
+      Liquid tank - 80.0% full, verify vents before transfer.
+  Daily revenue: 2017.10
+
+== 2. INVOICES BY CLIENT TIER ==
+  Walk-in      Walk In Ltd          discount 0.0% -> 11148.00
+  Contract     Blue Star Shipping   discount 25.0% -> 2133.08
+  Government   Port Authority       discount 25.0% -> 1814.40
+
+== 3. DRAINAGE ROUND (3000 L per tank) ==
+  U-004: moved 3000.0 L, now 65.0% full
+
+  Revenue after drainage:
+Manifest for Ashdod Terminal A (4/26 units)
+  Standard[id=U-001, owner=Walk In Ltd, 18000.0 kg, 10 days] volume=33.0 m3
+      Standard container - check seals and twist-locks before lifting.
+  Reefer[id=U-002, owner=Blue Star Shipping, 21000.0 kg, 7 days] volume=28.0 m3 temp=-18.0 C power=6.5 kW
+      Reefer - keep power connected, target -18.0 C, draw 6.5 kW.
+  Hazmat[id=U-003, owner=Port Authority, 15000.0 kg, 4 days] volume=24.0 m3 hazard=3 escort=true
+      Hazmat class 3 - escort required.
+  Tank[id=U-004, owner=Walk In Ltd, 26000.0 kg, 12 days] capacity=20000.0 L fill=65.0%
+      Liquid tank - 65.0% full, verify vents before transfer.
+  Daily revenue: 1915.10
+
+== 4. PART D - OVERSIZED CARGO JOINS THE EXISTING YARD ==
+  Received U-005 - no change was needed in Yard.
+
+Manifest for Ashdod Terminal A (5/26 units)
+  Standard[id=U-001, owner=Walk In Ltd, 18000.0 kg, 10 days] volume=33.0 m3
+      Standard container - check seals and twist-locks before lifting.
+  Reefer[id=U-002, owner=Blue Star Shipping, 21000.0 kg, 7 days] volume=28.0 m3 temp=-18.0 C power=6.5 kW
+      Reefer - keep power connected, target -18.0 C, draw 6.5 kW.
+  Hazmat[id=U-003, owner=Port Authority, 15000.0 kg, 4 days] volume=24.0 m3 hazard=3 escort=true
+      Hazmat class 3 - escort required.
+  Tank[id=U-004, owner=Walk In Ltd, 26000.0 kg, 12 days] capacity=20000.0 L fill=65.0%
+      Liquid tank - 65.0% full, verify vents before transfer.
+  Oversized[id=U-005, owner=Blue Star Shipping, 45000.0 kg, 3 days] length=18.5 m heavyCrane=true
+      Oversized load 18.5 m - heavy crane required.
+  Daily revenue: 2167.60
+  
+================================================  
+  run.bat check  
+================================================  
+  
+--- checking Yard.java ---
+  CLEAN - this file respects the open/closed rule.
+
+OPEN/CLOSED CHECK PASSED
